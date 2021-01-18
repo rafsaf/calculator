@@ -25,7 +25,7 @@ const PointsForm = ({ setPoints }) => {
         <Form>
           <div>
             <BootstrapForm.Label>
-              Wpisz maks. ilość punktów ze sprawdzianu, dla 25 i więcej plusy i minusy przy ocenach.
+              Wpisz maks. ilość punktów ze sprawdzianu, dla 20 i więcej plusy i minusy przy ocenach.
             </BootstrapForm.Label>
           </div>
           <div className="row">
@@ -81,7 +81,7 @@ const IndexPage = () => {
   const submitPoints = (points) => {
     setPoints(points);
   };
-  const calculatePointsDown25 = () => {
+  const calculatePointsDown20 = () => {
     const numbs = {
       one: 0,
       two: Math.ceil((points * 30) / 100),
@@ -99,85 +99,25 @@ const IndexPage = () => {
     ]
   }
 
-  const calculatePointsUp25 = () => {
-    const numbs = {
-      one: { down: 0, up: Math.round((points * 25) / 100) },
-      two: {
-        down: Math.round((points * 35) / 100),
-        up: Math.round((points * 45) / 100),
-      },
-      three: {
-        down: Math.round((points * 55) / 100),
-        up: Math.round((points * 65) / 100),
-      },
-      four: {
-        down: Math.round((points * 75) / 100),
-        up: Math.round((points * 85) / 100),
-      },
-      five: {
-        down: Math.round((points * 95) / 100),
-        up: Math.round((points * 100) / 100),
-      },
-    };
-    const diff_1 =
-      Math.round((points * 35) / 100) - Math.round((points * 25) / 100) - 1;
-    const diff_2 =
-      Math.round((points * 55) / 100) - Math.round((points * 45) / 100) - 1;
-    const diff_3 =
-      Math.round((points * 75) / 100) - Math.round((points * 65) / 100) - 1;
-    const diff_4 =
-      Math.round((points * 95) / 100) - Math.round((points * 85) / 100) - 1;
-
-    const up_one = numbs.one.up + Math.round(diff_1 / 2);
-    
-    const up_two = numbs.two.up + Math.round(diff_2 / 2);
-
-    const up_three = numbs.three.up + Math.round(diff_3 / 2);
-
-    const up_four = numbs.four.up + Math.round(diff_4 / 2);
+  const calculatePointsUp20 = () => {
 
     return [
-      // 1
-      [numbs.one.down,
-      numbs.one.up],
-      // 1+
-      [numbs.one.up + 1,
-      up_one],
-        // 2-
-      [up_one + 1,
-      numbs.two.down - 1],
-        // 2
-      [numbs.two.down,
-      numbs.two.up],
-        //
-      [numbs.two.up + 1,
-      up_two],
-
-      [up_two + 1,
-      numbs.three.down - 1],
-
-      [numbs.three.down,
-      numbs.three.up],
-
-      [numbs.three.up + 1,
-      up_three],
-
-      [up_three + 1,
-      numbs.four.down - 1],
-
-      [numbs.four.down,
-      numbs.four.up],
-
-      [numbs.four.up + 1,
-      up_four],
-
-      [up_four + 1,
-      numbs.five.down - 1],
-
-      [numbs.five.down,
-        numbs.five.up],
+      [0, Math.floor((points * 25) / 100)],
+      [Math.floor((points * 25) / 100) + 1, Math.floor((points * 30) / 100)],
+      [Math.floor((points * 30) / 100) + 1, Math.floor((points * 35) / 100)],
+      [Math.floor((points * 35) / 100) + 1, Math.floor((points * 45) / 100)],
+      [Math.floor((points * 45) / 100) + 1, Math.floor((points * 50) / 100)],
+      [Math.floor((points * 50) / 100) + 1, Math.floor((points * 55) / 100)],
+      [Math.floor((points * 55) / 100) + 1, Math.floor((points * 65) / 100)],
+      [Math.floor((points * 65) / 100) + 1, Math.floor((points * 70) / 100)],
+      [Math.floor((points * 70) / 100) + 1, Math.floor((points * 75) / 100)],
+      [Math.floor((points * 75) / 100) + 1, Math.floor((points * 85) / 100)],
+      [Math.floor((points * 85) / 100) + 1, Math.floor((points * 90) / 100)],
+      [Math.floor((points * 90) / 100) + 1, Math.floor((points * 95) / 100)],
+      [Math.floor((points * 95) / 100) + 1, Math.floor((points * 100) / 100)],
 
     ]
+
   };
   return (
     <div className="container my-2">
@@ -189,8 +129,8 @@ const IndexPage = () => {
           <div className="col-auto">
             <h3>Sugerowane progi:</h3>
 
-            {(points >= 25) ?
-            calculatePointsUp25(points).map((row, index) => (
+            {(points >= 20) ?
+            calculatePointsUp20(points).map((row, index) => (
               <p>
               {grades[index]} &nbsp;&nbsp;{" "}
               <b>
@@ -199,7 +139,7 @@ const IndexPage = () => {
               pkt
             </p>
             )) : 
-            calculatePointsDown25(points).map((row, index) => (
+            calculatePointsDown20(points).map((row, index) => (
               <p>
               {gradesMin[index]} &nbsp;&nbsp;{" "}
               <b>
