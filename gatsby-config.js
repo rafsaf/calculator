@@ -1,7 +1,9 @@
 module.exports = {
   siteMetadata: {
     title: "calculator",
+    siteUrl: "https://rafsaf.github.io"
   },
+  pathPrefix: "/calculator/",
   plugins: [
     "gatsby-plugin-react-helmet",
     "gatsby-plugin-sitemap",
